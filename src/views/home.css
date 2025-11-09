@@ -1,0 +1,480 @@
+.home-container1 {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  background-color: #d0d1b7;
+}
+ 
+.home-text100 {
+  display: inline-block;
+}
+ 
+.home-text101 {
+  display: inline-block;
+}
+ 
+.home-text102 {
+  display: inline-block;
+}
+ 
+.home-text103 {
+  display: inline-block;
+}
+ 
+.home-text104 {
+  display: inline-block;
+}
+ 
+.home-text105 {
+  display: inline-block;
+}
+ 
+.home-text106 {
+  display: inline-block;
+}
+ 
+.home-text107 {
+  display: inline-block;
+}
+ 
+.home-text108 {
+  display: inline-block;
+}
+ 
+.home-text109 {
+  display: inline-block;
+}
+ 
+.home-text110 {
+  display: inline-block;
+}
+ 
+.home-text111 {
+  display: inline-block;
+}
+ 
+.home-text112 {
+  display: inline-block;
+}
+ 
+.home-text113 {
+  display: inline-block;
+}
+ 
+.home-image {
+  width: 838px;
+  height: 415px;
+  object-fit: cover;
+  padding-top: var(--dl-layout-space-halfunit);
+  border-radius: 12px;
+  padding-bottom: 6px;
+}
+ 
+.home-text114 {
+  display: inline-block;
+}
+ 
+.home-text115 {
+  display: inline-block;
+}
+ 
+.home-text116 {
+  display: inline-block;
+}
+ 
+.home-text117 {
+  display: inline-block;
+}
+ 
+.home-text118 {
+  display: inline-block;
+}
+ 
+.home-text119 {
+  display: inline-block;
+}
+ 
+.home-text120 {
+  display: inline-block;
+}
+ 
+.home-text121 {
+  display: inline-block;
+}
+ 
+.home-text122 {
+  display: inline-block;
+}
+ 
+.home-text123 {
+  display: inline-block;
+}
+ 
+.home-text124 {
+  display: inline-block;
+}
+ 
+.home-text125 {
+  display: inline-block;
+}
+ 
+.home-text126 {
+  font-weight: 700;
+}
+ 
+.home-text130 {
+  font-weight: 700;
+}
+ 
+.home-text134 {
+  font-weight: 700;
+}
+ 
+.home-text138 {
+  font-weight: 700;
+}
+ 
+.home-text142 {
+  font-weight: 700;
+}
+ 
+.home-text146 {
+  font-weight: 700;
+}
+ 
+.home-text150 {
+  font-weight: 700;
+}
+ 
+.home-text152 {
+  display: inline-block;
+}
+ 
+.home-text153 {
+  display: inline-block;
+}
+ 
+.home-text154 {
+  display: inline-block;
+}
+ 
+.home-text155 {
+  display: inline-block;
+}
+ 
+.home-text156 {
+  display: inline-block;
+}
+ 
+.home-text157 {
+  font-weight: 700;
+}
+ 
+.home-text159 {
+  font-style: italic;
+}
+ 
+.home-text163 {
+  font-weight: 700;
+}
+ 
+.home-text167 {
+  font-weight: 700;
+}
+ 
+.home-text171 {
+  font-weight: 700;
+}
+ 
+.home-text175 {
+  font-weight: 700;
+}
+ 
+.home-text179 {
+  font-weight: 700;
+}
+ 
+.home-text183 {
+  font-weight: 700;
+}
+ 
+.home-text185 {
+  display: inline-block;
+}
+ 
+.home-text186 {
+  display: inline-block;
+}
+ 
+.home-text187 {
+  display: inline-block;
+}
+ 
+.home-text188 {
+  display: inline-block;
+}
+ 
+.home-text189 {
+  display: inline-block;
+}
+ 
+.home-text190 {
+  display: inline-block;
+}
+ 
+.home-text191 {
+  display: inline-block;
+}
+ 
+.home-text192 {
+  display: inline-block;
+}
+ 
+.home-text193 {
+  display: inline-block;
+}
+ 
+.home-text194 {
+  display: inline-block;
+}
+ 
+.home-text200 {
+  display: inline-block;
+}
+ 
+.home-text207 {
+  display: inline-block;
+}
+ 
+.home-text208 {
+  display: inline-block;
+}
+ 
+.home-text209 {
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  font-size: 25px;
+  font-family: "Inter";
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: none;
+  text-decoration: none;
+}
+ 
+.home-text210 {
+  color: var(--dl-color-theme-neutral-light);
+  display: inline-block;
+  font-family: "Inter";
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: none;
+  text-decoration: none;
+}
+ 
+.home-text212 {
+  font-size: 30px;
+}
+ 
+.home-text214 {
+  font-size: 30px;
+}
+ 
+.home-text215 {
+  display: inline-block;
+}
+ 
+.home-text216 {
+  display: inline-block;
+}
+ 
+.home-text217 {
+  display: inline-block;
+}
+ 
+.home-text218 {
+  display: inline-block;
+}
+ 
+.home-text219 {
+  display: inline-block;
+}
+ 
+.home-text220 {
+  display: inline-block;
+}
+ 
+.home-text221 {
+  display: inline-block;
+}
+ 
+.home-text222 {
+  display: inline-block;
+}
+ 
+.home-text223 {
+  display: inline-block;
+}
+ 
+.home-text224 {
+  display: inline-block;
+}
+ 
+.home-text225 {
+  display: inline-block;
+}
+ 
+.home-text226 {
+  display: inline-block;
+}
+ 
+.home-text227 {
+  display: inline-block;
+}
+ 
+.home-text228 {
+  display: inline-block;
+}
+ 
+.home-text229 {
+  display: inline-block;
+}
+ 
+.home-text230 {
+  display: inline-block;
+}
+ 
+.home-text231 {
+  display: inline-block;
+}
+ 
+.home-text232 {
+  display: inline-block;
+}
+ 
+.home-text233 {
+  display: inline-block;
+}
+ 
+.home-text234 {
+  display: inline-block;
+}
+ 
+.home-text235 {
+  display: inline-block;
+}
+ 
+.home-text236 {
+  display: inline-block;
+}
+ 
+.home-text237 {
+  display: inline-block;
+}
+ 
+.home-text238 {
+  display: inline-block;
+}
+ 
+.home-text239 {
+  display: inline-block;
+}
+ 
+.home-text240 {
+  display: inline-block;
+}
+ 
+.home-text241 {
+  display: inline-block;
+}
+ 
+.home-text242 {
+  display: inline-block;
+}
+ 
+.home-text243 {
+  display: inline-block;
+  font-size: 25px;
+  font-family: "Inter";
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: none;
+  text-decoration: none;
+}
+ 
+.home-text244 {
+  display: inline-block;
+}
+ 
+.home-text245 {
+  display: inline-block;
+}
+ 
+.home-text246 {
+  display: inline-block;
+}
+ 
+.home-text247 {
+  display: inline-block;
+}
+ 
+.home-text248 {
+  display: inline-block;
+}
+ 
+.home-text249 {
+  display: inline-block;
+}
+ 
+.home-accordion {
+  width: 100%;
+  display: flex;
+  box-shadow: 5px 5px 10px 0px #d4d4d4;
+  flex-direction: column;
+}
+ 
+.home-container2 {
+  display: flex;
+  padding-top: var(--dl-layout-space-halfunit);
+  padding-left: var(--dl-layout-space-oneandhalfunits);
+  padding-right: var(--dl-layout-space-oneandhalfunits);
+  flex-direction: column;
+  padding-bottom: var(--dl-layout-space-halfunit);
+}
+ 
+.home-link {
+  display: contents;
+}
+ 
+.home-container3 {
+  right: 50px;
+  border: 1px solid #ffffff5c;
+  bottom: 30px;
+  display: flex;
+  z-index: 22;
+  position: fixed;
+  box-shadow: 5px 5px 10px 0px rgba(31, 31, 31, 0.4);
+  min-height: auto;
+  align-items: center;
+  padding-top: 8px;
+  padding-left: 12px;
+  border-radius: 8px;
+  padding-right: 12px;
+  padding-bottom: 8px;
+  backdrop-filter: blur(6px);
+  background-color: rgba(41, 41, 41, 0.41);
+}
+ 
+.home-icon1 {
+  width: 24px;
+  margin-right: 4px;
+}
+ 
+.home-text251 {
+  color: white;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
