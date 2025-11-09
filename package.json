@@ -1,7 +1,7 @@
 {
   "name": "the-royal-oak",
+  "homepage": "https://willg06.github.io/RoyalOakCC/",
   "version": "1.0.0",
-  "homepage": "https://WillG06.github.io/RoyalOakCC",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -14,13 +14,13 @@
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
-  "start": "craco start",
-  "build": "craco build",
-  "test": "craco test --env=jsdom",
-  "eject": "craco eject",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
-},
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test --env=jsdom",
+    "eject": "craco eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "engines": {
     "node": ">=18.x"
   },
