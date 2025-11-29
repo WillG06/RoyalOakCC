@@ -8,7 +8,7 @@ import ContactUs from './contactUs.jsx';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/RoyalOakCC">
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<RoyalOakWebsite />} />
