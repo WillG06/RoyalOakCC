@@ -1,0 +1,570 @@
+{/* This website was produced by Will Giles for the company of Royal Oak in Car Colston  // Uses React.JS and Tailwind.CSS // 25/11/2025 */ }
+
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ChevronUp } from 'lucide-react';
+
+const RoyalOakWebsite = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [visibleSections, setVisibleSections] = useState(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setShowBackToTop(window.scrollY > 800);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -300px 0px' }   // how far away from section for it to transition
+    );
+
+    document.querySelectorAll('[data-animate]').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Menus', path: '/menus' },
+    { name: 'Contact', path: '/contact' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
+      <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
+        ? 'bg-[#1a2820]/80 backdrop-blur-md shadow-2xl py-3'
+        : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
+        }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+
+            {/* Logo */}
+            <div className="flex items-center">
+              <h2
+                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80 ? 'text-white text-xl' : 'text-[#D4C4A8] text-2xl'
+                  }`}
+              >
+                THE ROYAL OAK
+              </h2>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
+                    ? 'text-white hover:text-[#D4C4A8]'
+                    : 'text-[#D4C4A8] hover:text-white'
+                    }`}
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#8B6F47] transition-all duration-300 group-hover:w-3/4"></span>
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA Buttons */}
+            <div className="hidden md:flex items-center space-x-3">
+              <button
+                className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
+                  ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  }`}
+              >
+                Menus
+              </button>
+
+              <button
+                className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
+                  ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                  : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                  }`}
+              >
+                Book
+              </button>
+            </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+              <div className="md:hidden absolute left-0 right-0 top-full bg-[#6f8876] backdrop-blur-md border-t border-[#8B6F47]/30 shadow-xl">
+                <nav className="flex flex-col px-4 py-4">
+                  {navLinks.map((link, i) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-3 px-4 rounded transition-all duration-300 text-sm font-medium uppercase tracking-wider"
+                      onClick={() => setIsMenuOpen(false)}
+                      style={{
+                        animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <div className="flex flex-col space-y-2 mt-4 px-4">
+                    <button className="px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300">
+                      Menus
+                    </button>
+                    <button className="px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                      Book
+                    </button>
+                  </div>
+                </nav>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden absolute left-0 right-0 top-full bg-[#6f8876] backdrop-blur-md border-t border-[#8B6F47]/30 shadow-xl">
+              <nav className="flex flex-col px-4 py-4">
+                {navLinks.map((link, i) => (
+                  <a
+                    key={link}
+                    href={`#${link.toLowerCase().replace(' ', '-')}`}
+                    className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-3 px-4 rounded transition-all duration-300 text-sm font-medium uppercase tracking-wider"
+                    onClick={() => setIsMenuOpen(false)}
+                    style={{
+                      animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
+                    }}
+                  >
+                    {link}
+                  </a>
+                ))}
+                <div className="flex flex-col space-y-2 mt-4 px-4">
+                  <button className="px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300">
+                    Menus
+                  </button>
+                  <button className="px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                    Book
+                  </button>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+
+
+      {/* Hero Section with pub image*/}
+      <section className="relative bg-[#6f8876] pt-[50px]" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
+          <div className="w-full h-80 md:h-[500px] bg-[#D4C4A8] flex items-center justify-center relative overflow-hidden border-l-4 border-r-4 border-[#8B6F47]">
+            <img src="\src\img\Pub.png" alt="PUB IMAGE" />
+          </div>
+        </div>
+
+        <div className="bg-white border-t-4 border-[#8B6F47]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-[#3A3A3A]">
+              Welcome to The Royal Oak
+            </h1>
+            <p className="text-lg text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
+              Richard, Vicky & the team offer you a warm welcome.<br></br>
+              We are proud that we have won Vale of Belvoir and Nottinghamshire CAMRA pub of the year for 2021, 2020 and 2009.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button className="px-8 py-3 bg-[#8B6F47] text-white font-medium rounded hover:bg-gray-600 transition-all duration-300">
+                View Menu
+              </button>
+              <button className="px-8 py-3 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
+                Book a Table
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Images below hero */}
+      <section id="images-section" data-animate className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-[#F5F1E8]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { title: 'Bar & Drinks', size: '500x400px', imgPath: 'src/img/BarBeers.jpeg' },
+            { title: 'Events', size: '500x400px', imgPath: 'src/img/horse.webp' },
+            { title: 'Fireplace', size: '500x400px', imgPath: 'src/img/fireplaceNEW.png' }
+          ].map((item, i) => (
+            <div
+              key={i}
+              className={`transform transition-all duration-700 hover:scale-105 bg-white border-4 border-[#8B6F47] hover:border-gray-800 rounded overflow-hidden shadow-lg ${visibleSections.has('images-section')
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-12'
+                }`}
+              style={{ transitionDelay: `${i * 150}ms` }}
+            >
+              {item.imgPath ? (
+                <img src={item.imgPath} alt={item.title} className="w-full h-64 object-cover" />
+              ) : (
+                <div className="w-full h-64 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-5xl mb-2 opacity-60">{item.icon}</div>
+                    <p className="text-white font-semibold">{item.title}</p>
+                    <p className="text-xs text-gray-200">{item.size}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features-section" data-animate className="bg-white py-20 border-y-2 border-[#D4C4A8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className={`w-full h-96 flex items-center justify-center rounded transition-all duration-700 ${visibleSections.has('features-section')
+              ? 'opacity-100 -translate-x-0'
+              : 'opacity-0 -translate-x-12'
+              }`}>
+              <img src="src\img\diningRoom.avif" alt="DINING ROOM IMAGE" />
+            </div>
+
+            <div className="space-y-8">
+              {[
+                { title: 'Classic Pub Atmosphere', text: 'Step into a historic countryside pub with a modern touch. Our traditional setting combined with contemporary comforts creates the perfect place to relax.' },
+                { title: 'Fine Wines & Local Ales', text: 'Sip on our carefully curated selection of fine wines and local ales. We pride ourselves on supporting local breweries and offering quality drinks.' },
+                { title: 'Sunday Roasts', text: 'Enjoy our delicious Sunday roasts with all the trimmings. Made with locally sourced ingredients and traditional recipes passed down through generations.' }
+              ].map((feature, i) => (
+                <div
+                  key={i}
+                  className={`border-l-4 border-[#8B6F47] pl-6 transition-all duration-700 hover:border-[#6F5838] ${visibleSections.has('features-section')
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 translate-x-12'
+                    }`}
+                  style={{ transitionDelay: `${i * 200}ms` }}
+                >
+                  <h2 className="text-3xl font-serif font-bold mb-3 text-[#3A3A3A]">
+                    {feature.title}
+                  </h2>
+                  <p className="text-gray-700 text-base leading-relaxed">
+                    {feature.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Opportunities  */}
+      <section id="opportunities-section" data-animate className="bg-[#F5F1E8] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              {[
+                {
+                  title: 'Sunday Roasts',
+                  text1: 'We serve our traditional Sunday Roasts every week, made with fresh, local ingredients. Our full main menu is still available, alongside a rotating specials board.',
+                  text2: 'Perfect for a cozy Sunday meal with something for everyone (VGF Options Available).'
+                },
+                {
+                  title: 'Bar Opportunities',
+                  text1: 'We are looking for enthusiastic, bright personalities to be part of front of house team.\nYou would be working behind the bar, taking orders as well as waitressing and giving customers the best service possible.',
+                  text2: null
+                },
+                {
+                  title: 'Kitchen Opportunities',
+                  text1: 'A rare opportunity has risen at our busy country pub for a kitchen assistant to help the chef prepare, cook & aid in general kitchen duties.',
+                  text2: 'Required: lunchtimes and occasional weekends & evenings.'
+                }
+              ].map((opp, i) => (
+                <div
+                  key={i}
+                  className={`bg-white border-l-4 border-[#8B6F47] p-8 shadow-md hover:shadow-lg transition-all duration-700 ${visibleSections.has('opportunities-section')
+                    ? 'opacity-100 -translate-x-0'
+                    : 'opacity-0 -translate-x-12'
+                    }`}
+                  style={{ transitionDelay: `${i * 150}ms` }}
+                >
+                  <h2 className="text-3xl font-serif font-bold mb-5 text-[#3A3A3A]">
+                    {opp.title}
+                  </h2>
+                  <p className="text-gray-700 text-base mb-4 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                    {opp.text1}
+                  </p>
+                  {opp.text2 && (
+                    <p className="text-gray-700 text-base leading-relaxed">
+                      {opp.text2}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className={`w-full h-full min-h-96 rounded flex items-center justify-center transition-all duration-700 ${visibleSections.has('opportunities-section')
+              ? 'opacity-100 translate-x-0'
+              : 'opacity-0 translate-x-12'
+              }`}>
+              <div className="text-center">
+                <img src="\src\img\BeersDraught.png" alt="Bar Shelves Photo" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Beer Taps Section */}
+      <section id="beer-section" data-animate className="relative py-24 overflow-hidden bg-[#6f8876]">
+        <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white transition-all duration-700 ${visibleSections.has('beer-section')
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-12'
+          }`}>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+            Pint of Personality
+          </h2>
+          <p className="text-xl md:text-2xl mb-6 font-light italic">
+            Rotating taps featuring bold brews, local favourites, and a few surprises along the way
+          </p>
+          <p className="text-lg mb-12 text-gray-300">
+            Selection of Fine Wines: From Full-Bodied to Fruity, Crafty Reds to Whites and adapting to suit every mood or meal
+          </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-16 mt-12">
+            {/* Cask Ales */}
+            <div className="flex gap-8">
+              {['Black Sheep', 'Pedigree', 'Wainright Gold'].map((beer, i) => (
+                <div
+                  key={beer}
+                  className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                    }`}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  <div className="group w-24 h-24 bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl transform transition-all duration-500 hover:scale-110 hover:bg-gray-600 hover:border-gray-600">
+                    <span className="text-gray-800 font-bold text-sm text-center px-2 group-hover:text-white transition-colors duration-300">
+                      {beer}
+                    </span>
+                  </div>
+                  <p className="mt-3 font-medium text-base">Ale</p>
+
+                </div>
+              ))}
+              {/* Divider */}
+              < div className="h-32 w-0.5 bg-white/30" ></div>
+
+              {/* Lagers/Keg Beers */}
+              <div className="flex gap-8">
+                {['Guinness', 'Thatchers', 'Birra Morretti', 'Fosters'].map((beer, i) => (
+                  <div
+                    key={beer}
+                    className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-8'
+                      }`}
+                    style={{ transitionDelay: `${(i + 3) * 100}ms` }}
+                  >
+                    <div className="group w-24 h-24 bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl transform transition-all duration-500 hover:scale-110 hover:bg-gray-600 hover:border-gray-600">
+                      <span className="text-gray-800 font-bold text-sm text-center px-2 group-hover:text-white transition-colors duration-300">
+                        {beer}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-base font-medium">Lager</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quality & Awards Section */}
+      <section id="quality-section" data-animate className="py-20 bg-white border-y-2 border-[#D4C4A8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Left Column */}
+            <div className={`space-y-8 transition-all duration-700 ${visibleSections.has('quality-section')
+              ? 'opacity-100 -translate-x-0'
+              : 'opacity-0 -translate-x-12'
+              }`}>
+              <div className="border-l-4 border-[#8B6F47] pl-6">
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#3A3A3A] leading-tight mb-4">
+                  Quality & Tradition
+                </h2>
+                <p className="text-gray-700 text-base leading-relaxed">
+                  At The Royal Oak, we pride ourselves on serving quality food and drink in a warm, welcoming atmosphere. Our commitment to excellence is recognized by our outstanding hygiene standards.
+                </p>
+              </div>
+
+              {/* Food Hygiene Rating Badge */}
+              <div className="inline-block">
+                <div className="bg-white border-4 border-[#8B6F47] text-black font-bold text-center rounded p-6 shadow-lg">
+                  <p className="text-sm mb-3 font-bold tracking-wider text-[#3A3A3A]">FOOD HYGIENE RATING</p>
+                  <div className="flex justify-center space-x-2 mb-3">
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                      <div key={i} className={`w-9 h-9 rounded-sm border-2 border-gray-600 flex items-center justify-center font-bold text-base ${i === 5 ? 'bg-gray-600 text-white' : 'bg-white text-[#3A3A3A]'}`}>
+                        {i}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-gray-600 text-white py-2 px-6 rounded font-bold text-base tracking-wide">
+                    VERY GOOD
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button className="px-8 py-3 bg-[#8B6F47] text-white font-medium text-base rounded hover:bg-gray-600 transition-all duration-300 border border-[#6F5838]">
+                  View Our Awards
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column - Cards */}
+            <div className="space-y-5">
+              {[
+                { num: '01', title: 'Visit The Royal Oak', text: 'Come and experience the charm and history of our historic countryside pub in Car Colston.' },
+                { num: '02', title: 'Enjoy Award-Winning Food and Drinks', text: 'Indulge in a selection of delicious dishes and beverages that have earned us prestigious awards.' },
+                { num: '03', title: 'Check Our Opening Times', text: 'Plan your visit by viewing our regular opening hours and special event schedules.' }
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className={`bg-[#F5F1E8] border-l-4 border-[#8B6F47] p-8 shadow-md hover:shadow-xl hover:bg-white hover:border-l-8 hover:-translate-y-1 transition-all duration-500 cursor-pointer group ${visibleSections.has('quality-section')
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 translate-x-12'
+                    }`}
+                  style={{ transitionDelay: `${i * 150}ms` }}
+                >
+                  <div className="flex items-start gap-6">
+                    <div className="text-5xl font-bold text-[#8B6F47] flex-shrink-0 font-serif transition-transform duration-300 group-hover:scale-110">
+                      {card.num}
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-serif font-bold mb-3 text-[#3A3A3A] group-hover:text-[#8B6F47] transition-colors duration-300">
+                        {card.title}
+                      </h3>
+                      <p className="text-gray-700 text-base leading-relaxed">
+                        {card.text}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Get in Touch Section */}
+      <section className="py-20 bg-[#F5F1E8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-[#3A3A3A]">
+              Get in Touch
+            </h2>
+            <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+              We'd love to hear from you. Whether you have a question about our menu, want to book a table, or just want to say hello, we're here to help.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            {/* Pub Info Card */}
+            <div className="bg-white border border-gray-300 rounded shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
+              <div className="w-full h-64 overflow-hidden">
+                <img src="\src\img\Pub.png" alt="The Royal Oak Pub" className="w-full h-full object-cover" style={{ objectPosition: '50% 35%' }} />
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="text-2xl font-serif font-bold mb-3 text-[#3A3A3A]">The Royal Oak</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">A historic countryside pub in Car Colston</p>
+                <button className="px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
+                  Get In Touch
+                </button>
+              </div>
+            </div>
+
+            {/* Map Card */}
+            <div className="bg-white border border-gray-300 rounded shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
+              <div className="w-full h-64">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2402.4439532838383!2d-0.9334637223907684!3d52.97641660233708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879c93d99d79bdf%3A0xb792c352bc6a4e32!2sThe%20Royal%20Oak!5e0!3m2!1sen!2suk!4v1764158228808!5m2!1sen!2suk"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="The Royal Oak Location"
+                ></iframe>
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="text-xl font-bold mb-3 text-[#3A3A3A]">
+                  Car Colston, The Green, Nottinghamshire, NG13 8JE
+                </h3>
+                <p className="text-gray-700 mb-6">Located in the heart of Car Colston village</p>
+                <button className="px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
+                  View On Map
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#566e5d] py-12 border-t-4 border-[#8B6F47]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-serif font-bold mb-6 text-[#D4C4A8]">The Royal Oak</h3>
+            <div className="flex flex-wrap justify-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group text-[#D4C4A8] hover:text-white}`}
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#8B6F47] transition-all duration-300 group-hover:w-3/4"></span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-gray-600 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400">© 2024 The Royal Oak</p>
+            <div className="flex gap-6">
+              <a href="#privacy" className="text-gray-400 hover:text-[#8B6F47] transition-colors text-sm">Privacy Policy</a>
+              <a href="#terms" className="text-gray-400 hover:text-[#8B6F47] transition-colors text-sm">Terms and Conditions</a>
+              <a href="#cookies" className="text-gray-400 hover:text-[#8B6F47] transition-colors text-sm">Cookies Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-10 right-10 bg-[#8B6F47] text-white p-4 rounded-full shadow-lg transform duration-700 ease-out hover:scale-150 hover:bg-gray-600 z-50 border-2 ${showBackToTop
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-6 pointer-events-none'
+          }`}
+        aria-label="Back to top"
+      >
+        <ChevronUp size={28} />
+      </button>
+    </div>
+  );
+};
+
+export default RoyalOakWebsite;
