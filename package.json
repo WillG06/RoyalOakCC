@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://willg06.github.io/WebsiteCV",
+  "homepage": "https://willg06.github.io/RoyalOakCC",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
