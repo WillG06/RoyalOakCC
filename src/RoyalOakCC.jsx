@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronUp } from 'lucide-react';
 
+import pub from './img/Pub.png';
+import Events from './img/horse.webp';
+import fireplace from './img/fireplace.avif';
+import diningRoom from './img/diningRoom.avif';
+import pubImage from './img/Pub.png';
+import bench from './img/bench.webp';
+
 const RoyalOakWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -173,7 +180,7 @@ const RoyalOakWebsite = () => {
       <section className="relative bg-[#6f8876] pt-[50px]" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
           <div className="w-full h-80 md:h-[500px] bg-[#D4C4A8] flex items-center justify-center relative overflow-hidden border-l-4 border-r-4 border-[#8B6F47]">
-            <img src="\src\img\Pub.png" alt="PUB IMAGE" />
+            <img src={pub} alt="PUB" />
           </div>
         </div>
 
@@ -202,9 +209,9 @@ const RoyalOakWebsite = () => {
       <section id="images-section" data-animate className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-[#F5F1E8]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: 'Bar & Drinks', size: '500x400px', imgPath: 'src/img/BarBeers.jpeg' },
-            { title: 'Events', size: '500x400px', imgPath: 'src/img/horse.webp' },
-            { title: 'Fireplace', size: '500x400px', imgPath: 'src/img/fireplaceNEW.png' }
+            { title: 'Pub', size: '500x400px', imgPath: '/img/Pub.png' },
+            { title: 'Events', size: '500x400px', imgPath: '/img/horse.webp' },
+            { title: 'DiningRoom', size: '500x400px', imgPath: '/img/diningRoom.avif' },
           ].map((item, i) => (
             <div
               key={i}

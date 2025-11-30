@@ -565,7 +565,7 @@ const AboutUsPage = () => {
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                   <div className="flex items-start gap-4">
                     <div>
-                      <p className="text-red-500 font-bold text-lg mb-2">When</p>
+                      <p className="text-white font-bold text-lg mb-2">When</p>
                       <p className="text-white/90">2nd - 24th December</p>
                       <p className="text-white/80 text-sm">Tuesday - Saturday, Lunch & Evening Service</p>
                     </div>
@@ -575,7 +575,7 @@ const AboutUsPage = () => {
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                   <div className="flex items-start gap-4">
                     <div>
-                      <p className="text-red-500 font-bold text-lg mb-2">Important</p>
+                      <p className="text-white font-bold text-lg mb-2">Important</p>
                       <p className="text-white/90">Book early to avoid disappointment - our most popular event of the year!</p>
                     </div>
                   </div>
