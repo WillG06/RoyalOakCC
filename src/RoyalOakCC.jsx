@@ -5,11 +5,9 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronUp } from 'lucide-react';
 
 import pub from './img/Pub.png';
-import Events from './img/horse.webp';
-import fireplace from './img/fireplace.avif';
+import horse from './img/horse.webp';
 import diningRoom from './img/diningRoom.avif';
-import pubImage from './img/Pub.png';
-import bench from './img/bench.webp';
+import BeersDraught from './img/BeersDraught.png';
 
 const RoyalOakWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,16 +58,18 @@ const RoyalOakWebsite = () => {
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
       <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
-        ? 'bg-[#1a2820]/80 backdrop-blur-md shadow-2xl py-3'
-        : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
+          ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
+          : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center relative">
 
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center z-10">
               <h2
-                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80 ? 'text-white text-xl' : 'text-[#D4C4A8] text-2xl'
+                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
+                    ? 'text-white text-base sm:text-xl'
+                    : 'text-[#D4C4A8] text-lg sm:text-2xl'
                   }`}
               >
                 THE ROYAL OAK
@@ -83,8 +83,8 @@ const RoyalOakWebsite = () => {
                   key={link.name}
                   to={link.path}
                   className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
-                    ? 'text-white hover:text-[#D4C4A8]'
-                    : 'text-[#D4C4A8] hover:text-white'
+                      ? 'text-white hover:text-[#D4C4A8]'
+                      : 'text-[#D4C4A8] hover:text-white'
                     }`}
                 >
                   {link.name}
@@ -93,12 +93,12 @@ const RoyalOakWebsite = () => {
               ))}
             </nav>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Desktop */}
             <div className="hidden md:flex items-center space-x-3">
               <button
                 className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
-                  ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                  : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                    ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                    : 'bg-[#8B6F47] text-white hover:bg-gray-700'
                   }`}
               >
                 Menus
@@ -106,81 +106,75 @@ const RoyalOakWebsite = () => {
 
               <button
                 className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
-                  ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
-                  : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                    ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                    : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
                   }`}
               >
                 Book
               </button>
             </div>
 
-            {/* Mobile Menu */}
-            {isMenuOpen && (
-              <div className="md:hidden absolute left-0 right-0 top-full bg-[#6f8876] backdrop-blur-md border-t border-[#8B6F47]/30 shadow-xl">
-                <nav className="flex flex-col px-4 py-4">
-                  {navLinks.map((link, i) => (
-                    <Link
-                      key={link.name}
-                      to={link.path}
-                      className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-3 px-4 rounded transition-all duration-300 text-sm font-medium uppercase tracking-wider"
-                      onClick={() => setIsMenuOpen(false)}
-                      style={{
-                        animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
-                      }}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                  <div className="flex flex-col space-y-2 mt-4 px-4">
-                    <button className="px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300">
-                      Menus
-                    </button>
-                    <button className="px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
-                      Book
-                    </button>
-                  </div>
-                </nav>
-              </div>
-            )}
+            {/* Mobile Menu Button */}
+            <button
+              className={`md:hidden z-10 p-2 transition-colors ${scrollY > 80 ? 'text-white' : 'text-[#D4C4A8]'
+                }`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden absolute left-0 right-0 top-full bg-[#6f8876] backdrop-blur-md border-t border-[#8B6F47]/30 shadow-xl">
-              <nav className="flex flex-col px-4 py-4">
-                {navLinks.map((link, i) => (
-                  <a
-                    key={link}
-                    href={`#${link.toLowerCase().replace(' ', '-')}`}
-                    className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-3 px-4 rounded transition-all duration-300 text-sm font-medium uppercase tracking-wider"
-                    onClick={() => setIsMenuOpen(false)}
-                    style={{
-                      animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
-                    }}
-                  >
-                    {link}
-                  </a>
-                ))}
-                <div className="flex flex-col space-y-2 mt-4 px-4">
-                  <button className="px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300">
-                    Menus
-                  </button>
-                  <button className="px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
-                    Book
-                  </button>
-                </div>
-              </nav>
-            </div>
-          )}
         </div>
-      </header>
 
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute left-0 right-0 top-full bg-[#2d4234] border-t border-[#8B6F47]/30 shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <nav className="flex flex-col">
+              {navLinks.map((link, i) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-4 px-6 border-b border-[#8B6F47]/10 transition-all duration-300 text-sm font-medium uppercase tracking-wider"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
+                  }}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="flex flex-col space-y-3 p-6 bg-[#1a2820]/30">
+                <button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
+                  Menus
+                </button>
+                <button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                  Book
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
 
       {/* Hero Section with pub image*/}
       <section className="relative bg-[#6f8876] pt-[50px]" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
           <div className="w-full h-80 md:h-[500px] bg-[#D4C4A8] flex items-center justify-center relative overflow-hidden border-l-4 border-r-4 border-[#8B6F47]">
-            <img src={pub} alt="PUB" />
+            <img src={pub} alt="pub" />
           </div>
         </div>
 
@@ -209,9 +203,9 @@ const RoyalOakWebsite = () => {
       <section id="images-section" data-animate className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-[#F5F1E8]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: 'Pub', size: '500x400px', imgPath: '/img/Pub.png' },
-            { title: 'Events', size: '500x400px', imgPath: '/img/horse.webp' },
-            { title: 'DiningRoom', size: '500x400px', imgPath: '/img/diningRoom.avif' },
+            { title: 'Pub', size: '500x400px', imgPath: pub },
+            { title: 'horse', size: '500x400px', imgPath: horse },
+            { title: 'DiningRoom', size: '500x400px', imgPath: diningRoom },
           ].map((item, i) => (
             <div
               key={i}
@@ -245,7 +239,7 @@ const RoyalOakWebsite = () => {
               ? 'opacity-100 -translate-x-0'
               : 'opacity-0 -translate-x-12'
               }`}>
-              <img src="src\img\diningRoom.avif" alt="DINING ROOM IMAGE" />
+              <img src={diningRoom} alt="DINING ROOM IMAGE" />
             </div>
 
             <div className="space-y-8">
@@ -325,7 +319,7 @@ const RoyalOakWebsite = () => {
               : 'opacity-0 translate-x-12'
               }`}>
               <div className="text-center">
-                <img src="\src\img\BeersDraught.png" alt="Bar Shelves Photo" />
+                <img src={BeersDraught} alt="Bar Shelves Photo" />
               </div>
             </div>
           </div>
