@@ -58,8 +58,8 @@ const RoyalOakWebsite = () => {
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
       <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
-          ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
-          : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
+        ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
+        : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center relative">
@@ -68,8 +68,8 @@ const RoyalOakWebsite = () => {
             <div className="flex items-center z-10">
               <h2
                 className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
-                    ? 'text-white text-base sm:text-xl'
-                    : 'text-[#D4C4A8] text-lg sm:text-2xl'
+                  ? 'text-white text-base sm:text-xl'
+                  : 'text-[#D4C4A8] text-lg sm:text-2xl'
                   }`}
               >
                 THE ROYAL OAK
@@ -83,8 +83,8 @@ const RoyalOakWebsite = () => {
                   key={link.name}
                   to={link.path}
                   className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
-                      ? 'text-white hover:text-[#D4C4A8]'
-                      : 'text-[#D4C4A8] hover:text-white'
+                    ? 'text-white hover:text-[#D4C4A8]'
+                    : 'text-[#D4C4A8] hover:text-white'
                     }`}
                 >
                   {link.name}
@@ -97,8 +97,8 @@ const RoyalOakWebsite = () => {
             <div className="hidden md:flex items-center space-x-3">
               <button
                 className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
-                    ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                    : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  : 'bg-[#8B6F47] text-white hover:bg-gray-700'
                   }`}
               >
                 Menus
@@ -106,8 +106,8 @@ const RoyalOakWebsite = () => {
 
               <button
                 className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
-                    ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
-                    : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                  ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                  : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
                   }`}
               >
                 Book
@@ -484,7 +484,7 @@ const RoyalOakWebsite = () => {
             {/* Pub Info Card */}
             <div className="bg-white border border-gray-300 rounded shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
               <div className="w-full h-64 overflow-hidden">
-                <img src="\src\img\Pub.png" alt="The Royal Oak Pub" className="w-full h-full object-cover" style={{ objectPosition: '50% 35%' }} />
+                <img src={pub} alt="pub" className="w-full h-full object-cover" style={{ objectPosition: '50% 35%' }} />
               </div>
               <div className="p-8 text-center">
                 <h3 className="text-2xl font-serif font-bold mb-3 text-[#3A3A3A]">The Royal Oak</h3>
