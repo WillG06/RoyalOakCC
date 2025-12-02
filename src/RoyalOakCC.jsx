@@ -170,31 +170,97 @@ const RoyalOakWebsite = () => {
         )}
       </header>
 
-      {/* Hero Section with pub image*/}
-      <section className="relative bg-[#6f8876] pt-[50px]" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
-          <div className="w-full h-80 md:h-[500px] bg-[#D4C4A8] flex items-center justify-center relative overflow-hidden border-l-4 border-r-4 border-[#8B6F47]">
-            <img src={pub} alt="pub" />
+      {/* Hero Section*/}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundPosition: "center 27%",
+            backgroundImage: `url(${pub})`,
+            transform: `translateY(${scrollY * 0.2}px)`
+          }}
+        ></div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a2820]/70 via-[#1a2820]/50 to-[#1a2820]/80"></div>
+
+
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {Array.from({ length: 30 }, (_, i) => {
+            const size = 1 + Math.random() * 4;
+            return {
+              id: i,
+              left: `${Math.random() * 100}%`,
+              startY: `${Math.random() * 100}%`,
+              size: size,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${8 + Math.random() * 12}s`,
+              opacity: 0.5 + Math.random() * 0.4
+            };
+          }).map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute bg-amber-500 rounded-full blur-sm"
+              style={{
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                left: particle.left,
+                top: particle.startY,
+                opacity: particle.opacity,
+                animationDelay: particle.animationDelay,
+                animationDuration: particle.animationDuration,
+                animation: 'floatParticle 20s infinite ease-in-out'
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1
+            className="mb-6 drop-shadow-2xl"
+            style={{
+              animation: 'fadeInUp 1s ease-out',
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: 'clamp(6rem, 10vw, 8rem)',
+              color: '#D4C4A8',
+              fontWeight: '400'
+            }}
+          >
+            The Royal Oak
+          </h1>
+
+          <div className="w-80 h-1 bg-[#8B6F47] mx-auto mb-6" style={{ animation: 'fadeInUp 1.2s ease-out' }}></div>
+
+          <p
+            className="text-xl md:text-2xl font-light mb-8 text-gray-100 leading-relaxed max-w-2xl mx-auto"
+            style={{ animation: 'fadeInUp 1.4s ease-out' }}
+          >
+            Richard, Vicky & the team offer you a warm welcome.<br></br><br></br>
+            We are proud that we have won Vale of Belvoir and Nottinghamshire CAMRA pub of the year for 2021, 2020 and 2009.
+          </p>
+
+          <div
+            className="flex flex-col sm:flex-row justify-center gap-4"
+            style={{ animation: 'fadeInUp 1.6s ease-out' }}
+          >
+            <button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+              View Menu
+            </button>
+            <button className="border-2 border-white hover:bg-white hover:text-[#1a2820] text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+              Book a Table
+            </button>
           </div>
         </div>
 
-        <div className="bg-white border-t-4 border-[#8B6F47]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-[#3A3A3A]">
-              Welcome to The Royal Oak
-            </h1>
-            <p className="text-lg text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Richard, Vicky & the team offer you a warm welcome.<br></br>
-              We are proud that we have won Vale of Belvoir and Nottinghamshire CAMRA pub of the year for 2021, 2020 and 2009.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-8 py-3 bg-[#8B6F47] text-white font-medium rounded hover:bg-gray-600 transition-all duration-300">
-                View Menu
-              </button>
-              <button className="px-8 py-3 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
-                Book a Table
-              </button>
-            </div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -203,29 +269,19 @@ const RoyalOakWebsite = () => {
       <section id="images-section" data-animate className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-[#F5F1E8]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: 'Pub', size: '500x400px', imgPath: pub },
-            { title: 'horse', size: '500x400px', imgPath: horse },
-            { title: 'DiningRoom', size: '500x400px', imgPath: diningRoom },
+            { title: 'Bar & Drinks', imgPath: pub },
+            { title: 'Events', imgPath: horse },
+            { title: 'Dining Room', imgPath: diningRoom },
           ].map((item, i) => (
             <div
               key={i}
-              className={`transform transition-all duration-700 hover:scale-105 bg-white border-4 border-[#8B6F47] hover:border-gray-800 rounded overflow-hidden shadow-lg ${visibleSections.has('images-section')
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-12'
+              className={`transform transition-all duration-1000 hover:scale-105 bg-white border-4 border-[#8B6F47] hover:border-gray-800 rounded overflow-hidden shadow-lg ${visibleSections.has('images-section')
+                ? 'opacity-100 translate-y-0 scale-100'
+                : 'opacity-0 translate-y-40 scale-90'
                 }`}
-              style={{ transitionDelay: `${i * 150}ms` }}
+              style={{ transitionDelay: `${i * 200}ms` }}
             >
-              {item.imgPath ? (
-                <img src={item.imgPath} alt={item.title} className="w-full h-64 object-cover" />
-              ) : (
-                <div className="w-full h-64 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-5xl mb-2 opacity-60">{item.icon}</div>
-                    <p className="text-white font-semibold">{item.title}</p>
-                    <p className="text-xs text-gray-200">{item.size}</p>
-                  </div>
-                </div>
-              )}
+              <img src={item.imgPath} alt={item.title} className="w-full h-64 object-cover" />
             </div>
           ))}
         </div>
@@ -326,65 +382,180 @@ const RoyalOakWebsite = () => {
         </div>
       </section>
 
-      {/* Beer Taps Section */}
-      <section id="beer-section" data-animate className="relative py-24 overflow-hidden bg-[#6f8876]">
+      <section id="beer-section" data-animate className="relative py-16 md:py-24 overflow-hidden bg-[#6f8876]">
         <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white transition-all duration-700 ${visibleSections.has('beer-section')
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-12'
           }`}>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 md:mb-6">
             Pint of Personality
           </h2>
-          <p className="text-xl md:text-2xl mb-6 font-light italic">
+          <p className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6 font-light italic px-2">
             Rotating taps featuring bold brews, local favourites, and a few surprises along the way
           </p>
-          <p className="text-lg mb-12 text-gray-300">
+          <p className="text-base md:text-lg mb-8 md:mb-12 text-gray-300 px-2">
             Selection of Fine Wines: From Full-Bodied to Fruity, Crafty Reds to Whites and adapting to suit every mood or meal
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-16 mt-12">
+          <div className="mb-8">
+            <p className="text-xl md:text-2xl font-serif font-semibold text-[#D4C4A8]">
+              A Selection of Our Beers
+            </p>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex flex-wrap justify-center items-center gap-16 mt-12">
             {/* Cask Ales */}
             <div className="flex gap-8">
-              {['Black Sheep', 'Pedigree', 'Wainright Gold'].map((beer, i) => (
+              {[
+                { name: 'Black Sheep', logo: 'BS' },
+                { name: 'Pedigree', logo: 'P' },
+                { name: 'Wainright Gold', logo: 'WR' }
+              ].map((beer, i) => (
                 <div
-                  key={beer}
+                  key={beer.name}
                   className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
                     }`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <div className="group w-24 h-24 bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl transform transition-all duration-500 hover:scale-110 hover:bg-gray-600 hover:border-gray-600">
-                    <span className="text-gray-800 font-bold text-sm text-center px-2 group-hover:text-white transition-colors duration-300">
-                      {beer}
-                    </span>
+                  <div className="group w-24 h-24 [perspective:1000px]">
+                    <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                      <div className="absolute w-full h-full bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden]">
+                        <span className="text-gray-800 font-bold text-4xl">
+                          {beer.logo}
+                        </span>
+                      </div>
+                      <div className="absolute w-full h-full bg-gray-600 border-4 border-gray-600 rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                        <span className="text-white font-bold text-sm text-center px-2">
+                          {beer.name}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <p className="mt-3 font-medium text-base">Ale</p>
-
                 </div>
               ))}
+            </div>
+
+            {/* Divider */}
+            <div className="h-32 w-0.5 bg-white/30"></div>
+
+            {/* Lagers/Keg Beers */}
+            <div className="flex gap-8">
+              {[
+                { name: 'Guinness', logo: 'G' },
+                { name: 'Thatchers', logo: 'TH' },
+                { name: 'Birra Morretti', logo: 'BM' },
+                { name: 'Fosters', logo: 'F' }
+              ].map((beer, i) => (
+                <div
+                  key={beer.name}
+                  className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                    }`}
+                  style={{ transitionDelay: `${(i + 3) * 100}ms` }}
+                >
+                  <div className="group w-24 h-24 [perspective:1000px]">
+                    <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                      <div className="absolute w-full h-full bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden]">
+                        <span className="text-gray-800 font-bold text-4xl">
+                          {beer.logo}
+                        </span>
+                      </div>
+                      <div className="absolute w-full h-full bg-gray-600 border-4 border-gray-600 rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                        <span className="text-white font-bold text-sm text-center px-2">
+                          {beer.name}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-base font-medium">Lager</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="lg:hidden mt-8">
+            <div className="flex items-start justify-center gap-8 px-4">
+              {/* Cask Ales */}
+              <div className="flex-1 max-w-[180px]">
+                <h3 className="text-xl font-serif font-bold mb-4 text-center">Cask Ales</h3>
+                <div className="space-y-3">
+                  {[
+                    { name: 'Black Sheep', logo: 'BS' },
+                    { name: 'Pedigree', logo: 'P' },
+                    { name: 'Wainright Gold', logo: 'WR' }
+                  ].map((beer, i) => (
+                    <div
+                      key={beer.name}
+                      className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-8'
+                        }`}
+                      style={{ transitionDelay: `${i * 100}ms` }}
+                    >
+                      <div className="group w-20 h-20 [perspective:1000px]">
+                        <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                          <div className="absolute w-full h-full bg-[#D4C4A8] border-3 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden]">
+                            <span className="text-gray-800 font-bold text-3xl">
+                              {beer.logo}
+                            </span>
+                          </div>
+                          <div className="absolute w-full h-full bg-gray-600 border-3 border-gray-600 rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                            <span className="text-white font-bold text-xs text-center px-1">
+                              {beer.name}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-2 font-medium text-sm">Ale</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Divider */}
-              < div className="h-32 w-0.5 bg-white/30" ></div>
+              <div className="w-px h-64 bg-white/30 self-center"></div>
 
               {/* Lagers/Keg Beers */}
-              <div className="flex gap-8">
-                {['Guinness', 'Thatchers', 'Birra Morretti', 'Fosters'].map((beer, i) => (
-                  <div
-                    key={beer}
-                    className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-8'
-                      }`}
-                    style={{ transitionDelay: `${(i + 3) * 100}ms` }}
-                  >
-                    <div className="group w-24 h-24 bg-[#D4C4A8] border-4 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl transform transition-all duration-500 hover:scale-110 hover:bg-gray-600 hover:border-gray-600">
-                      <span className="text-gray-800 font-bold text-sm text-center px-2 group-hover:text-white transition-colors duration-300">
-                        {beer}
-                      </span>
+              <div className="flex-1 max-w-[180px]">
+                <h3 className="text-xl font-serif font-bold mb-4 text-center">Cask Ales</h3>
+                <div className="space-y-3">
+                  {[
+                    { name: 'Guiness', logo: 'G' },
+                    { name: 'Fosters', logo: 'F' },
+                    { name: 'Birra Merretti', logo: 'BM' }
+                  ].map((beer, i) => (
+                    <div
+                      key={beer.name}
+                      className={`flex flex-col items-center transition-all duration-700 ${visibleSections.has('beer-section')
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-8'
+                        }`}
+                      style={{ transitionDelay: `${i * 100}ms` }}
+                    >
+                      <div className="group w-20 h-20 [perspective:1000px]">
+                        <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                          <div className="absolute w-full h-full bg-[#D4C4A8] border-3 border-[#8B6F47] rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden]">
+                            <span className="text-gray-800 font-bold text-3xl">
+                              {beer.logo}
+                            </span>
+                          </div>
+                          <div className="absolute w-full h-full bg-gray-600 border-3 border-gray-600 rounded-lg flex items-center justify-center shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                            <span className="text-white font-bold text-xs text-center px-1">
+                              {beer.name}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-2 font-medium text-sm">Lager</p>
                     </div>
-                    <p className="mt-3 text-base font-medium">Lager</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
