@@ -49,7 +49,7 @@ const RoyalOakWebsite = () => {
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/' }, 
     { name: 'About Us', path: '/about' },
     { name: 'Menus', path: '/menus' },
     { name: 'Contact', path: '/contact' }
