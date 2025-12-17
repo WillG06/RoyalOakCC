@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronLeft, ChevronRight, ChevronUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 import barArea from './img/barArea.png';
@@ -11,6 +11,7 @@ import pubImage from './img/Pub.png';
 import bench from './img/bench.webp';
 
 const AboutUsPage = () => {
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -66,6 +67,9 @@ const AboutUsPage = () => {
 
 
   useEffect(() => {
+
+    setVisibleSections(new Set());
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -82,7 +86,7 @@ const AboutUsPage = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [location]);
 
 
 
@@ -97,22 +101,24 @@ const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
       <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
-          ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
-          : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
+        ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
+        : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center relative">
 
             {/* Logo */}
             <div className="flex items-center z-10">
-              <h2
-                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
+              <Link to="/">
+                <h2
+                  className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
                     ? 'text-white text-base sm:text-xl'
                     : 'text-[#D4C4A8] text-lg sm:text-2xl'
-                  }`}
-              >
-                THE ROYAL OAK
-              </h2>
+                    }`}
+                >
+                  THE ROYAL OAK
+                </h2>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
@@ -122,8 +128,8 @@ const AboutUsPage = () => {
                   key={link.name}
                   to={link.path}
                   className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
-                      ? 'text-white hover:text-[#D4C4A8]'
-                      : 'text-[#D4C4A8] hover:text-white'
+                    ? 'text-white hover:text-[#D4C4A8]'
+                    : 'text-[#D4C4A8] hover:text-white'
                     }`}
                 >
                   {link.name}
@@ -134,23 +140,23 @@ const AboutUsPage = () => {
 
             {/* CTA Buttons - Desktop */}
             <div className="hidden md:flex items-center space-x-3">
-              <button
+              <Link to="/menus"><button
                 className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
-                    ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                    : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                  : 'bg-[#8B6F47] text-white hover:bg-gray-700'
                   }`}
               >
                 Menus
-              </button>
+              </button></Link>
 
-              <button
+              <Link to="/contact#contact-info"><button
                 className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
-                    ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
-                    : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                  ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                  : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
                   }`}
               >
                 Book
-              </button>
+              </button></Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -197,12 +203,12 @@ const AboutUsPage = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-3 p-6 bg-[#1a2820]/30">
-                <button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
+                <Link to="/menus"><button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
                   Menus
-                </button>
-                <button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                </button></Link>
+                <Link to="/contact#contact-info"><button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
                   Book
-                </button>
+                </button></Link>
               </div>
             </nav>
           </div>
@@ -309,7 +315,7 @@ const AboutUsPage = () => {
 
               <button className="mt-6 bg-[#8B6F47] hover:bg-gray-700 text-white px-10 py-4 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
                 Learn More
-              </button>
+              </button>   {/*Not sure where this is going yet*/}
             </div>
             <div
               id="about-image"
@@ -427,9 +433,12 @@ const AboutUsPage = () => {
                     To reserve your pitch at our caravan park, please call us directly. Our friendly team will be happy to assist you with availability and answer any questions.
                   </p>
 
-                  <button className="w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
+                  <a
+                    href="tel:0194920247"
+                    className="block w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
+                  >
                     Call to Book: 01949 20247
-                  </button>
+                  </a>
 
                   <p className="text-center text-sm text-gray-600 mt-4">
                     Open January to December
@@ -580,9 +589,9 @@ const AboutUsPage = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
+                <Link to="/contact#contact-info"><button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
                   Book Now
-                </button>
+                </button></Link>
                 <button className="border-2 border-white text-white hover:bg-white hover:text-[#1a2820] px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105">
                   View Christmas Menu
                 </button>
@@ -635,9 +644,9 @@ const AboutUsPage = () => {
                       <span>Tailored Celebrations</span>
                     </div>
                   </div>
-                  <button className="w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md mt-auto">
+                  <Link to="/contact#contact-info"><button className="w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md mt-auto">
                     Book Your Party
-                  </button>
+                  </button></Link>
                 </div>
               </div>
             </div>
@@ -655,12 +664,12 @@ const AboutUsPage = () => {
             Experience the warmth and charm of The Royal Oak. Whether you're looking for a quiet pint, a delicious meal, or a place to celebrate with friends, we'd love to welcome you.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="px-8 py-4 bg-[#8B6F47] text-white font-medium text-lg rounded hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <Link to="/menus"><button className="px-8 py-4 bg-[#8B6F47] text-white font-medium text-lg rounded hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
               View Menus
-            </button>
-            <button className="px-8 py-4 border-2 border-[#8B6F47] text-[#8B6F47] font-medium text-lg rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300 transform hover:scale-105">
+            </button></Link>
+            <Link to="/contact#contact-info"><button className="px-8 py-4 border-2 border-[#8B6F47] text-[#8B6F47] font-medium text-lg rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300 transform hover:scale-105">
               Book a Table
-            </button>
+            </button></Link>
           </div>
         </div>
       </section>

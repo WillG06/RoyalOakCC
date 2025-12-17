@@ -1,11 +1,14 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, ChevronUp } from 'lucide-react';
+import { FaTripadvisor } from 'react-icons/fa';
+
 
 import barArea from './img/barArea.png';
 
 const contactUs = () => {
+    const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showBackToTop, setShowBackToTop] = useState(false);
     const [scrollY, setScrollY] = useState(0);
@@ -50,6 +53,9 @@ const contactUs = () => {
     };
 
     useEffect(() => {
+
+        setVisibleSections(new Set());
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -66,27 +72,29 @@ const contactUs = () => {
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [location]);
 
     return (
         <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
             <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
-                    ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
-                    : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
+                ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
+                : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
                 }`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center relative">
 
                         {/* Logo */}
                         <div className="flex items-center z-10">
-                            <h2
-                                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
+                            <Link to="/">
+                                <h2
+                                    className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
                                         ? 'text-white text-base sm:text-xl'
                                         : 'text-[#D4C4A8] text-lg sm:text-2xl'
-                                    }`}
-                            >
-                                THE ROYAL OAK
-                            </h2>
+                                        }`}
+                                >
+                                    THE ROYAL OAK
+                                </h2>
+                            </Link>
                         </div>
 
                         {/* Desktop Navigation */}
@@ -96,8 +104,8 @@ const contactUs = () => {
                                     key={link.name}
                                     to={link.path}
                                     className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
-                                            ? 'text-white hover:text-[#D4C4A8]'
-                                            : 'text-[#D4C4A8] hover:text-white'
+                                        ? 'text-white hover:text-[#D4C4A8]'
+                                        : 'text-[#D4C4A8] hover:text-white'
                                         }`}
                                 >
                                     {link.name}
@@ -108,23 +116,23 @@ const contactUs = () => {
 
                         {/* CTA Buttons - Desktop */}
                         <div className="hidden md:flex items-center space-x-3">
-                            <button
+                            <Link to="/menus"><button
                                 className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
-                                        ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                                        : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                                    ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                                    : 'bg-[#8B6F47] text-white hover:bg-gray-700'
                                     }`}
                             >
                                 Menus
-                            </button>
+                            </button></Link>
 
-                            <button
+                            <Link to="/contact#contact-info"><button
                                 className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
-                                        ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
-                                        : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                                    ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                                    : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
                                     }`}
                             >
                                 Book
-                            </button>
+                            </button></Link>
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -171,12 +179,12 @@ const contactUs = () => {
                                 </Link>
                             ))}
                             <div className="flex flex-col space-y-3 p-6 bg-[#1a2820]/30">
-                                <button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
+                                <Link to="/menus"><button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
                                     Menus
-                                </button>
-                                <button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                                </button></Link>
+                                <Link to="/contact#contact-info"><button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
                                     Book
-                                </button>
+                                </button></Link>
                             </div>
                         </nav>
                     </div>
@@ -324,6 +332,16 @@ const contactUs = () => {
                                         <Facebook className="w-6 h-6 group-hover:scale-110 transition-transform" />
                                         <span className="text-lg font-medium">The Royal Oak Car Colston</span>
                                     </a>
+                                    <a
+                                        href="https://www.tripadvisor.co.uk/Restaurant_Review-g3395486-d2660209-Reviews-The_Royal_Oak-Car_Colston_Nottinghamshire_England.html"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 text-gray-700 hover:text-[#8B6F47] transition-all duration-300 group"
+                                    >
+                                        <FaTripadvisor className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                                        <span className="text-lg font-medium">The Royal Oak Car Colston</span>
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -437,15 +455,15 @@ const contactUs = () => {
                         Whether you're planning a meal, a drink, or a special celebration, we're here to welcome you with open arms.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <button className="px-8 py-4 bg-[#8B6F47] text-white font-medium text-lg rounded hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <Link to="/menus"><button className="px-8 py-4 bg-[#8B6F47] text-white font-medium text-lg rounded hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                             View Menus
-                        </button>
-                        <button
+                        </button></Link>
+                        <Link to="/contact#contact-info"><button
                             onClick={() => window.scrollTo({ top: document.getElementById('contact-info').offsetTop - 100, behavior: 'smooth' })}
                             className="px-8 py-4 border-2 border-white text-white font-medium text-lg rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300 transform hover:scale-105"
                         >
                             Book a Table
-                        </button>
+                        </button></Link>
                     </div>
                 </div>
             </section>

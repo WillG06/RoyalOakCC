@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
 
 import BeersDraught from './img/BeersDraught.png';
+import { Link, useLocation } from 'react-router-dom';
 
 const MenuPage = () => {
+    const location = useLocation();
     const [activeMenu, setActiveMenu] = useState('main');
     const [showBackToTop, setShowBackToTop] = useState(false);
     const [scrollY, setScrollY] = useState(0);
@@ -20,6 +22,9 @@ const MenuPage = () => {
     }, []);
 
     useEffect(() => {
+
+        setVisibleSections(new Set());
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -36,7 +41,7 @@ const MenuPage = () => {
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [location]);
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -170,44 +175,89 @@ const MenuPage = () => {
 
     return (
         <div className="min-h-screen bg-[#F5F1E8] text-gray-900">
-            {/* Header */}
             <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 80
                 ? 'bg-[#1a2820]/95 backdrop-blur-md shadow-2xl py-3'
                 : 'bg-[#2d4234]/95 backdrop-blur-sm py-4'
                 }`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center relative">
+
                         {/* Logo */}
                         <div className="flex items-center z-10">
-                            <h2 className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80 ? 'text-white text-base sm:text-xl' : 'text-[#D4C4A8] text-lg sm:text-2xl'}`}>
-                                THE ROYAL OAK
-                            </h2>
+                            <Link to="/">
+                                <h2
+                                    className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
+                                        ? 'text-white text-base sm:text-xl'
+                                        : 'text-[#D4C4A8] text-lg sm:text-2xl'
+                                        }`}
+                                >
+                                    THE ROYAL OAK
+                                </h2>
+                            </Link>
                         </div>
 
                         {/* Desktop Navigation */}
                         <nav className="hidden md:flex items-center space-x-1">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.path} className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80 ? 'text-white hover:text-[#D4C4A8]' : 'text-[#D4C4A8] hover:text-white'}`}>
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group ${scrollY > 80
+                                        ? 'text-white hover:text-[#D4C4A8]'
+                                        : 'text-[#D4C4A8] hover:text-white'
+                                        }`}
+                                >
                                     {link.name}
                                     <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#8B6F47] transition-all duration-300 group-hover:w-3/4"></span>
-                                </a>
+                                </Link>
                             ))}
                         </nav>
 
                         {/* CTA Buttons - Desktop */}
                         <div className="hidden md:flex items-center space-x-3">
-                            <button className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80 ? 'bg-[#8B6F47] text-white hover:bg-gray-700' : 'bg-[#8B6F47] text-white hover:bg-gray-700'}`}>
-                                Menus
-                            </button>
-                            <button className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80 ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700' : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'}`}>
-                                Book
-                            </button>
+                            <Link to="/menus">
+                                <button
+                                    className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
+                                        ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                                        : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                                        }`}
+                                >
+                                    Menus
+                                </button>
+                            </Link>
+                            <Link to="/contact#contact-info">
+                                <button
+                                    className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
+                                        ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                                        : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                                        }`}
+                                >
+                                    Book
+                                </button>
+                            </Link>
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button className={`md:hidden z-10 p-2 transition-colors ${scrollY > 80 ? 'text-white' : 'text-[#D4C4A8]'}`} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-                            <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                                {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+                        <button
+                            className={`md:hidden z-10 p-2 transition-colors ${scrollY > 80 ? 'text-white' : 'text-[#D4C4A8]'
+                                }`}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                {isMenuOpen ? (
+                                    <path d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path d="M4 6h16M4 12h16M4 18h16" />
+                                )}
                             </svg>
                         </button>
                     </div>
@@ -218,13 +268,25 @@ const MenuPage = () => {
                     <div className="md:hidden absolute left-0 right-0 top-full bg-[#2d4234] border-t border-[#8B6F47]/30 shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
                         <nav className="flex flex-col">
                             {navLinks.map((link, i) => (
-                                <a key={link.name} href={link.path} className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-4 px-6 border-b border-[#8B6F47]/10 transition-all duration-300 text-sm font-medium uppercase tracking-wider" onClick={() => setIsMenuOpen(false)} style={{ animation: `slideIn 0.3s ease-out ${i * 0.05}s both` }}>
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    className="text-white hover:text-[#D4C4A8] hover:bg-[#8B6F47]/20 py-4 px-6 border-b border-[#8B6F47]/10 transition-all duration-300 text-sm font-medium uppercase tracking-wider"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    style={{
+                                        animation: `slideIn 0.3s ease-out ${i * 0.05}s both`
+                                    }}
+                                >
                                     {link.name}
-                                </a>
+                                </Link>
                             ))}
                             <div className="flex flex-col space-y-3 p-6 bg-[#1a2820]/30">
-                                <button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">Menus</button>
-                                <button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">Book</button>
+                                <Link to="/menus"><button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
+                                    Menus
+                                </button></Link>
+                                <Link to="/contact#contact-info"><button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                                    Book
+                                </button></Link>
                             </div>
                         </nav>
                     </div>
@@ -233,7 +295,7 @@ const MenuPage = () => {
 
             {/* Hero Section */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundPosition: "center 55%",  backgroundImage: `url(${BeersDraught})`, transform: `translateY(${scrollY * 0.5}px)` }}></div>
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundPosition: "center 55%", backgroundImage: `url(${BeersDraught})`, transform: `translateY(${scrollY * 0.5}px)` }}></div>
                 {/* Gradient over image */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1a2820]/70 via-[#1a2820]/50 to-[#1a2820]/80"></div>
 
@@ -338,13 +400,18 @@ const MenuPage = () => {
                         <h3 className="text-2xl font-serif font-bold mb-6 text-[#D4C4A8]">The Royal Oak</h3>
                         <div className="flex flex-wrap justify-center gap-8">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.path} className="relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group text-[#D4C4A8] hover:text-white">
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    className={`relative px-4 py-2 transition-all duration-300 text-sm font-medium uppercase tracking-wider group text-[#D4C4A8] hover:text-white}`}
+                                >
                                     {link.name}
                                     <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#8B6F47] transition-all duration-300 group-hover:w-3/4"></span>
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
+
                     <div className="border-t border-gray-600 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-gray-400">© 2024 The Royal Oak</p>
                         <div className="flex gap-6">

@@ -1,6 +1,6 @@
 {/* This website was produced by Will Giles for the company of Royal Oak in Car Colston  // Uses React.JS and Tailwind.CSS // 25/11/2025 */ }
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronUp } from 'lucide-react';
 
@@ -10,6 +10,7 @@ import diningRoom from './img/diningRoom.avif';
 import BeersDraught from './img/BeersDraught.png';
 
 const RoyalOakWebsite = () => {
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -26,6 +27,9 @@ const RoyalOakWebsite = () => {
   }, []);
 
   useEffect(() => {
+
+    setVisibleSections(new Set());
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -42,14 +46,14 @@ const RoyalOakWebsite = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [location]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' }, 
+    { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Menus', path: '/menus' },
     { name: 'Contact', path: '/contact' }
@@ -66,14 +70,16 @@ const RoyalOakWebsite = () => {
 
             {/* Logo */}
             <div className="flex items-center z-10">
-              <h2
-                className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
-                  ? 'text-white text-base sm:text-xl'
-                  : 'text-[#D4C4A8] text-lg sm:text-2xl'
-                  }`}
-              >
-                THE ROYAL OAK
-              </h2>
+              <Link to ="/">
+                <h2
+                  className={`font-serif font-bold tracking-wider transition-all duration-500 ${scrollY > 80
+                    ? 'text-white text-base sm:text-xl'
+                    : 'text-[#D4C4A8] text-lg sm:text-2xl'
+                    }`}
+                >
+                  THE ROYAL OAK
+                </h2>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
@@ -95,23 +101,26 @@ const RoyalOakWebsite = () => {
 
             {/* CTA Buttons - Desktop */}
             <div className="hidden md:flex items-center space-x-3">
-              <button
-                className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
-                  ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                  : 'bg-[#8B6F47] text-white hover:bg-gray-700'
-                  }`}
-              >
-                Menus
-              </button>
-
-              <button
-                className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
-                  ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
-                  : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
-                  }`}
-              >
-                Book
-              </button>
+              <Link to="/menus">
+                <button
+                  className={`px-5 py-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl ${scrollY > 80
+                    ? 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                    : 'bg-[#8B6F47] text-white hover:bg-gray-700'
+                    }`}
+                >
+                  Menus
+                </button>
+              </Link>
+              <Link to="/contact#contact-info">
+                <button
+                  className={`px-5 py-2 border-2 font-medium text-sm uppercase tracking-wide rounded transform hover:scale-105 transition-all duration-300 ${scrollY > 80
+                    ? 'border-white text-white hover:bg-gray-700 hover:text-white hover:border-gray-700'
+                    : 'border-[#8B6F47] text-[#D4C4A8] hover:bg-[#8B6F47] hover:text-white'
+                    }`}
+                >
+                  Book
+                </button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -158,12 +167,12 @@ const RoyalOakWebsite = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-3 p-6 bg-[#1a2820]/30">
-                <button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
+                <Link to="/menus"><button className="w-full px-5 py-3 bg-[#8B6F47] text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-gray-700 transition-all duration-300 shadow-md">
                   Menus
-                </button>
-                <button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
+                </button></Link>
+                <Link to="/contact#contact-info"><button className="w-full px-5 py-3 border-2 border-white text-white font-medium text-sm uppercase tracking-wide rounded hover:bg-white hover:text-[#1a2820] transition-all duration-300">
                   Book
-                </button>
+                </button></Link>
               </div>
             </nav>
           </div>
@@ -243,12 +252,12 @@ const RoyalOakWebsite = () => {
             className="flex flex-col sm:flex-row justify-center gap-4"
             style={{ animation: 'fadeInUp 1.6s ease-out' }}
           >
-            <button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+            <Link to="/menus"><button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
               View Menu
-            </button>
-            <button className="border-2 border-white hover:bg-white hover:text-[#1a2820] text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+            </button></Link>
+            <Link to="/contact#contact-info"><button className="border-2 border-white hover:bg-white hover:text-[#1a2820] text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
               Book a Table
-            </button>
+            </button></Link>
           </div>
         </div>
 
@@ -598,9 +607,9 @@ const RoyalOakWebsite = () => {
               </div>
 
               <div>
-                <button className="px-8 py-3 bg-[#8B6F47] text-white font-medium text-base rounded hover:bg-gray-600 transition-all duration-300 border border-[#6F5838]">
+                <Link to="/about"><button className="px-8 py-3 bg-[#8B6F47] text-white font-medium text-base rounded hover:bg-gray-600 transition-all duration-300 border border-[#6F5838]">
                   View Our Awards
-                </button>
+                </button></Link>
               </div>
             </div>
 
@@ -660,9 +669,9 @@ const RoyalOakWebsite = () => {
               <div className="p-8 text-center">
                 <h3 className="text-2xl font-serif font-bold mb-3 text-[#3A3A3A]">The Royal Oak</h3>
                 <p className="text-gray-700 mb-6 leading-relaxed">A historic countryside pub in Car Colston</p>
-                <button className="px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
+                <Link to="/contact"><button className="px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
                   Get In Touch
-                </button>
+                </button></Link>
               </div>
             </div>
 
@@ -685,9 +694,15 @@ const RoyalOakWebsite = () => {
                   Car Colston, The Green, Nottinghamshire, NG13 8JE
                 </h3>
                 <p className="text-gray-700 mb-6">Located in the heart of Car Colston village</p>
-                <button className="px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-300">
+                <a
+                  href="https://maps.app.goo.gl/uYjCnGe9KvFtxEhw9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-2 border-2 border-[#8B6F47] text-[#8B6F47] font-medium rounded hover:bg-[#8B6F47] hover:text-white
+                             transition-all duration-300"
+                >
                   View On Map
-                </button>
+                </a>
               </div>
             </div>
           </div>
