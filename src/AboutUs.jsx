@@ -592,9 +592,15 @@ const AboutUsPage = () => {
                 <Link to="/contact#contact-info"><button className="bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
                   Book Now
                 </button></Link>
-                <button className="border-2 border-white text-white hover:bg-white hover:text-[#1a2820] px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105">
-                  View Christmas Menu
-                </button>
+                <a
+                  href="https://www.royaloakcarcolston.co.uk/_files/ugd/423abe_b859a29a593546a3bcbf82763921c49a.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="border-2 border-white text-white hover:bg-white hover:text-[#1a2820] px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105">
+                    View Christmas Menu
+                  </button>
+                </a>
               </div>
             </div>
 
