@@ -28,7 +28,7 @@ const RoyalOakWebsite = () => {
 
   useEffect(() => {
 
-    setVisibleSections(new Set());
+    setVisibleSections(new Set());                     // animates for each section loaded in
 
     const observer = new IntersectionObserver(
       (entries) => {
