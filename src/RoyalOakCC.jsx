@@ -12,7 +12,7 @@ import bsImg from './img/BS.png';
 import pImg from './img/P.png';
 import wImg from './img/W.png';
 import gImg from './img/G.svg';
-import thImg from './img/TH.jpg';
+import thImg from './img/TH.png';
 import bmImg from './img/BM.png';
 import fImg from './img/F.png';
 
@@ -417,7 +417,7 @@ const RoyalOakWebsite = () => {
             <p className="text-xl md:text-2xl font-serif font-semibold text-[#D4C4A8]">
               A Selection of Our Beers
             </p>
-            <div className="w-16 h-0.5 bg-[#8B6F47] mx-auto mt-3"></div>
+            <div className="w-24 h-0.5 bg-[#8B6F47] mx-auto mt-3"></div>
           </div>
 
           {/* Desktop Layout */}
@@ -543,8 +543,8 @@ const RoyalOakWebsite = () => {
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="w-px h-64 bg-gradient-to-b from-transparent via-[#D4C4A8]/50 to-transparent self-center"></div>
+              {/* Mobile Divider */}
+              <div className="w-px h-64 bg-white/40 self-center"></div>
 
               {/* Lagers/Keg Beers */}
               <div className="flex-1 max-w-[180px]">
