@@ -401,7 +401,7 @@ const AboutUsPage = () => {
 
               {/* Right Column - Pricing & Booking */}
               <div className="space-y-8">
-                <div className="border-2 border-gray-700 bg-[#6f8876]/80 rounded-lg p-8">
+                <div className="border-2 border-gray-700 bg-[#6f8876]/80 rounded-2xl p-8">
                   <h3 className="text-3xl font-serif font-bold mb-8 text-center text-[#1a2820]">
                     Nightly Rates
                   </h3>
@@ -435,7 +435,7 @@ const AboutUsPage = () => {
 
                   <a
                     href="tel:0194920247"
-                    className="block w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
+                    className="block w-full bg-[#8B6F47] hover:bg-gray-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
                   >
                     Call to Book: 01949 20247
                   </a>
