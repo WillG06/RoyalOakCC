@@ -9,6 +9,7 @@ import fireplace from './img/fireplace.avif';
 import diningRoom from './img/diningRoom.avif';
 import pubImage from './img/Pub.png';
 import bench from './img/bench.webp';
+import events from './img/events.png';
 
 const AboutUsPage = () => {
   const location = useLocation();
@@ -341,7 +342,7 @@ const AboutUsPage = () => {
         </div>
       </section>
       {/* Caravan Park Section */}
-      <section id="caravan-section" data-animate className="py-32 bg-white">
+      <section id="caravan-section" data-animate className="py-20 bg-white border-t-2 border-b-4 border-[#8B6F47]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`transition-all duration-1000 ${visibleSections.has('caravan-section')
@@ -451,93 +452,118 @@ const AboutUsPage = () => {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery-section" data-animate className="py-32 bg-gradient-to-b bg-[#6f8876]">
+      <section id="gallery-section" data-animate className="relative py-24 bg-[#6f8876]">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className={`text-center mb-20 transition-all duration-1000 ${visibleSections.has('gallery-section')
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <h2 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-[#1a2820]">
-              Gallery
-            </h2>
-            <div className="w-24 h-1 bg-[#8B6F47] mx-auto mb-6"></div>
-            <p className="text-xl text-gray-300">
-              Take a visual journey through The Royal Oak
-            </p>
-          </div>
 
-          {/* Featured Image Carousel */}
-          <div className="relative h-[550px] md:h-[650px] mb-16 rounded-2xl overflow-hidden shadow-2xl group">
-            <img
-              src={galleryImages[currentImageIndex]}
-              alt={`Gallery ${currentImageIndex + 1}`}
-              className="w-full h-full object-cover transition-all duration-700"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-
-            <button
-              onClick={prevImage}
-              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100"
-              aria-label="Previous image"
-            >
-              <ChevronLeft size={32} />
-            </button>
-
-            <button
-              onClick={nextImage}
-              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100"
-              aria-label="Next image"
-            >
-              <ChevronRight size={32} />
-            </button>
-
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
-              {galleryImages.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentImageIndex(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === currentImageIndex
-                    ? 'bg-white w-12'
-                    : 'bg-white/50 w-2 hover:bg-white/70'
-                    }`}
-                  aria-label={`Go to image ${i + 1}`}
-                />
-              ))}
+          <div className={`mb-16 transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            <div className="flex items-center gap-6">
+              <div className="flex-1 h-px bg-white/20"></div>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">Gallery</h2>
+              <div className="flex-1 h-px bg-white/20"></div>
             </div>
+            <p className="text-center text-[#D4C4A8] mt-4 italic">A visual display through The Royal Oak</p>
           </div>
 
-          {/* Thumbnail Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                onClick={() => setCurrentImageIndex(i)}
-                className={`relative h-40 md:h-48 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${i === currentImageIndex
-                  ? 'ring-4 ring-gray-700 scale-105'
-                  : 'hover:scale-105'
-                  }`}
-              >
-                <img
-                  src={img}
-                  alt={`Thumbnail ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
-                <div className={`absolute inset-0 transition-opacity duration-300 ${i === currentImageIndex
-                  ? 'bg-[#8B6F47]/30'
-                  : 'bg-black/0 hover:bg-black/10'
-                  }`}></div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+
+            {/* Large */}
+            <div
+              className={`relative row-span-2 overflow-hidden rounded-xl cursor-pointer group transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '0ms' }}
+              onClick={() => setCurrentImageIndex(0)}
+            >
+              <img src={galleryImages[0]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-[#1a2820]/0 group-hover:bg-[#1a2820]/20 transition-all duration-500"></div>
+              <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-xs uppercase tracking-widest font-semibold bg-[#8B6F47]/80 px-3 py-1 rounded-full">The Royal Oak</span>
               </div>
-            ))}
+            </div>
+
+
+            <div
+              className={`relative overflow-hidden rounded-xl cursor-pointer group transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '100ms', aspectRatio: '4/3' }}
+              onClick={() => setCurrentImageIndex(1)}
+            >
+              <img src={galleryImages[1]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-[#1a2820]/0 group-hover:bg-[#1a2820]/20 transition-all duration-500"></div>
+            </div>
+            <div
+              className={`relative overflow-hidden rounded-xl cursor-pointer group transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '200ms', aspectRatio: '4/3' }}
+              onClick={() => setCurrentImageIndex(2)}
+            >
+              <img src={galleryImages[2]} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-[#1a2820]/0 group-hover:bg-[#1a2820]/20 transition-all duration-500"></div>
+            </div>
+            <div
+              className={`relative overflow-hidden rounded-xl cursor-pointer group transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '300ms', aspectRatio: '4/3' }}
+              onClick={() => setCurrentImageIndex(3)}
+            >
+              <img src={galleryImages[3]} alt="Gallery 4" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-[#1a2820]/0 group-hover:bg-[#1a2820]/20 transition-all duration-500"></div>
+            </div>
+            <div
+              className={`relative overflow-hidden rounded-xl cursor-pointer group transition-all duration-1000 ${visibleSections.has('gallery-section') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '400ms', aspectRatio: '4/3' }}
+              onClick={() => setCurrentImageIndex(4)}
+            >
+              <img src={galleryImages[4]} alt="Gallery 5" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-[#1a2820]/40 group-hover:bg-[#1a2820]/60 transition-all duration-500 flex items-center justify-center">
+                <div className="text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-2xl font-serif font-bold">+{galleryImages.length - 4}</p>
+                  <p className="text-xs uppercase tracking-widest mt-1">More Photos</p>
+                </div>
+              </div>
+            </div>
+
           </div>
+
+
+          {currentImageIndex !== null && (
+            <div className="mt-6 relative rounded-2xl overflow-hidden shadow-2xl group" style={{ height: '500px' }}>
+              <img
+                src={galleryImages[currentImageIndex]}
+                alt={`Gallery ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              <button
+                onClick={prevImage}
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-[#8B6F47]/80 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-[#8B6F47]/80 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100"
+              >
+                <ChevronRight size={24} />
+              </button>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {galleryImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentImageIndex(i)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === currentImageIndex ? 'bg-[#D4C4A8] w-8' : 'bg-white/50 w-1.5 hover:bg-white/70'}`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
         </div>
       </section>
 
       {/* Events Section */}
-      <section id="events-section" data-animate className="py-32 bg-[#F5F1E8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="events-section" data-animate className="relative py-32 bg-[#F5F1E8]">
+
+        {/* Background Image */}
+        <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${events})` }}></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-20 transition-all duration-1000 ${visibleSections.has('events-section')
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-12'
