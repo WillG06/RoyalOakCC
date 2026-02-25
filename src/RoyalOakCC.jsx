@@ -324,7 +324,7 @@ const RoyalOakWebsite = () => {
             transform: `translateY(${scrollY * 0.2}px)`
           }}
         ></div>
-        <div className="absolute inset-0 bg-[#1a2820]/85 z-8" />
+        <div className="absolute inset-0 bg-[#1a2820]/70 z-8" />
 
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
