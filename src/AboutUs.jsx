@@ -342,8 +342,10 @@ const AboutUsPage = () => {
         </div>
       </section>
       {/* Caravan Park Section */}
-      <section id="caravan-section" data-animate className="py-20 bg-white border-t-2 border-b-4 border-[#8B6F47]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="caravan-section" data-animate className="relative overflow-hidden py-20 bg-white border-t-2 border-b-4 border-[#8B6F47]">
+        {/* Background Image */}
+        <div className="absolute inset-0 bg-cover bg-center opacity-35" style={{ backgroundImage: `url(${bench})` }}></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`transition-all duration-1000 ${visibleSections.has('caravan-section')
               ? 'opacity-100 translate-y-0'
@@ -402,7 +404,7 @@ const AboutUsPage = () => {
 
               {/* Right Column - Pricing & Booking */}
               <div className="space-y-8">
-                <div className="border-2 border-gray-700 bg-[#6f8876]/80 rounded-2xl p-8">
+                <div className="border-2 border-gray-700 bg-[#6f8876] rounded-2xl p-8">
                   <h3 className="text-3xl font-serif font-bold mb-8 text-center text-[#1a2820]">
                     Nightly Rates
                   </h3>
