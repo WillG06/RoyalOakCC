@@ -56,6 +56,19 @@ const RoyalOakWebsite = () => {
     return () => observer.disconnect();
   }, [location]);
 
+  const particles = React.useMemo(() => Array.from({ length: 20 }, (_, i) => {
+    const size = 1 + Math.random() * 4;
+    return {
+      id: i,
+      left: `${Math.random() * 100}%`,
+      startY: `${Math.random() * 100}%`,
+      size,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${8 + Math.random() * 12}s`,
+      opacity: 0.5 + Math.random() * 0.4
+    };
+  }), []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -187,133 +200,6 @@ const RoyalOakWebsite = () => {
         )}
       </header>
 
-      {/* <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#1a2820]">
-
-        
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: `url(${pub})` }}
-        ></div>
-
-      
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {Array.from({ length: 30 }, (_, i) => {
-            const size = 1 + Math.random() * 4;
-            return {
-              id: i,
-              left: `${Math.random() * 100}%`,
-              startY: `${Math.random() * 100}%`,
-              size,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 12}s`,
-              opacity: 0.5 + Math.random() * 0.4
-            };
-          }).map((particle) => (
-            <div
-              key={particle.id}
-              className="absolute bg-amber-500 rounded-full blur-sm"
-              style={{
-                width: `${particle.size}px`,
-                height: `${particle.size}px`,
-                left: particle.left,
-                top: particle.startY,
-                opacity: particle.opacity,
-                animationDelay: particle.animationDelay,
-                animationDuration: particle.animationDuration,
-                animation: 'floatParticle 20s infinite ease-in-out'
-              }}
-            />
-          ))}
-        </div>
-
-        
-        <div className="absolute top-0 left-0 right-0 h-1 bg-[#8B6F47] z-20"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#8B6F47] z-20"></div>
-
-
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 flex items-center gap-16">
-
-        
-          <div className="hidden md:flex flex-shrink-0 items-center justify-center relative" style={{ animation: 'fadeInUp 1s ease-out' }}>
-            <div className="border-2 border-[#8B6F47] rounded-lg p-2">
-              <img
-                src={pub}
-                alt="The Royal Oak"
-                className="w-[580px] h-[680px] object-cover rounded-md"
-                style={{ objectPosition: '10% center' }}
-              />
-            </div>
-            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#8B6F47]/30 rounded-lg -z-10"></div>
-          </div>
-
-         
-          <div className="flex-1 text-white flex flex-col items-center text-center">
-            <p
-              className="text-xs uppercase tracking-[0.4em] text-[#8B6F47] mb-6 font-semibold"
-              style={{ animation: 'fadeInUp 0.8s ease-out' }}
-            >
-              Car Colston, Nottinghamshire
-            </p>
-
-            <h1
-              className="mb-6 drop-shadow-2xl"
-              style={{
-                animation: 'fadeInUp 1s ease-out',
-                fontFamily: "'Great Vibes', cursive",
-                fontSize: 'clamp(3.5rem, 6vw, 6rem)',
-                color: '#D4C4A8',
-                fontWeight: '400'
-              }}
-            >
-              The Royal Oak
-            </h1>
-
-            <div className="w-48 h-px bg-[#8B6F47] mb-6" style={{ animation: 'fadeInUp 1.2s ease-out' }}></div>
-
-            <p
-              className="text-base md:text-lg font-light mb-4 text-gray-300 leading-relaxed max-w-sm"
-              style={{ animation: 'fadeInUp 1.4s ease-out' }}
-            >
-              Richard, Vicky & the team offer you a warm welcome.
-            </p>
-
-            <p
-              className="text-sm text-[#D4C4A8]/70 mb-10 max-w-sm leading-relaxed"
-              style={{ animation: 'fadeInUp 1.5s ease-out' }}
-            >
-              CAMRA Pub of the Year — Vale of Belvoir & Nottinghamshire 2021, 2020 & 2009
-            </p>
-
-            <div
-              className="flex flex-col sm:flex-row justify-center gap-4"
-              style={{ animation: 'fadeInUp 1.6s ease-out' }}
-            >
-              <Link to="/menus">
-                <button className="bg-[#8B6F47] hover:bg-white hover:text-[#1a2820] text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-sm uppercase tracking-wider">
-                  View Menu
-                </button>
-              </Link>
-              <Link to="/contact#contact-info">
-                <button className="border border-white/40 hover:border-white hover:bg-white hover:text-[#1a2820] text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-sm uppercase tracking-wider">
-                  Book a Table
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
-
-      </section>
-      
-      thoughts -- KEEP THIS DESIGN FOR MOBILE BUT USE OLD DESIGN FOR MAIN WITH OPACITY AS DARKER TO SEE TEXT, USE NEW TEXT DESIGN */}
-
       {/* Hero Section*/}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div
@@ -328,18 +214,7 @@ const RoyalOakWebsite = () => {
 
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {Array.from({ length: 30 }, (_, i) => {
-            const size = 1 + Math.random() * 4;
-            return {
-              id: i,
-              left: `${Math.random() * 100}%`,
-              startY: `${Math.random() * 100}%`,
-              size: size,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 12}s`,
-              opacity: 0.5 + Math.random() * 0.4
-            };
-          }).map((particle) => (
+          {particles.map((particle) => (
             <div
               key={particle.id}
               className="absolute bg-amber-500 rounded-full blur-sm"
@@ -349,28 +224,26 @@ const RoyalOakWebsite = () => {
                 left: particle.left,
                 top: particle.startY,
                 opacity: particle.opacity,
-                animationDelay: particle.animationDelay,
-                animationDuration: particle.animationDuration,
-                animation: 'floatParticle 20s infinite ease-in-out'
+                animation: `floatParticle ${particle.animationDuration} ${particle.animationDelay} infinite ease-in-out`
               }}
             />
           ))}
         </div>
 
-        <div className="relative z-10 flex-1 text-white flex flex-col items-center text-center px-4">
+        <div className="absolute bottom-[27%] left-0 right-0 z-10 text-white flex flex-col items-center text-center px-4 overflow-hidden">
           <p
-            className="text-sm uppercase tracking-[0.4em] text-[#8B6F47] mb-8 font-semibold"
+            className="text-[10px] md:text-sm uppercase tracking-normal md:tracking-[0.4em] text-[#8B6F47] mb-4 md:mb-8 font-semibold"
             style={{ animation: 'fadeInUp 0.8s ease-out' }}
           >
             Car Colston, Nottinghamshire
           </p>
 
           <h1
-            className="mb-8 drop-shadow-2xl"
+            className="mb-4 md:mb-8 drop-shadow-2xl"
             style={{
               animation: 'fadeInUp 1s ease-out',
               fontFamily: "'Great Vibes', cursive",
-              fontSize: 'clamp(4rem, 7vw, 8rem)',
+              fontSize: 'clamp(3.5rem, 7vw, 8rem)',
               color: '#D4C4A8',
               fontWeight: '400'
             }}
@@ -378,33 +251,33 @@ const RoyalOakWebsite = () => {
             The Royal Oak
           </h1>
 
-          <div className="w-64 h-px bg-[#8B6F47] mb-8" style={{ animation: 'fadeInUp 1.2s ease-out' }}></div>
+          <div className="w-48 md:w-64 h-px bg-[#8B6F47] mb-4 md:mb-8" style={{ animation: 'fadeInUp 1.2s ease-out' }}></div>
 
           <p
-            className="text-xl md:text-2xl font-light mb-6 text-gray-300 leading-relaxed max-w-lg"
+            className="text-base md:text-2xl font-light mb-4 md:mb-6 text-gray-300 leading-relaxed max-w-lg"
             style={{ animation: 'fadeInUp 1.4s ease-out' }}
           >
             Richard, Vicky & the team offer you a warm welcome.
           </p>
 
           <p
-            className="text-base text-[#D4C4A8]/70 mb-12 max-w-lg leading-relaxed"
+            className="text-sm text-[#D4C4A8]/70 mb-6 max-w-lg leading-relaxed"
             style={{ animation: 'fadeInUp 1.5s ease-out' }}
           >
             CAMRA Pub of the Year — Vale of Belvoir & Nottinghamshire 2021, 2020 & 2009
           </p>
 
           <div
-            className="flex flex-col sm:flex-row justify-center gap-4"
+            className="flex flex-col sm:flex-row justify-center gap-3 mt-10"
             style={{ animation: 'fadeInUp 1.6s ease-out' }}
           >
             <Link to="/menus">
-              <button className="bg-[#8B6F47] hover:bg-white hover:text-[#1a2820] text-white px-10 py-4 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-sm uppercase tracking-wider">
+              <button className="bg-[#8B6F47] hover:bg-white hover:text-[#1a2820] text-white px-7 py-2.5 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-xs uppercase tracking-wider">
                 View Menu
               </button>
             </Link>
             <Link to="/contact#contact-info">
-              <button className="border border-white/40 hover:border-white hover:bg-white hover:text-[#1a2820] text-white px-10 py-4 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-sm uppercase tracking-wider">
+              <button className="border border-white/40 hover:border-white hover:bg-white hover:text-[#1a2820] text-white px-7 py-2.5 rounded-md font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-xs uppercase tracking-wider">
                 Book a Table
               </button>
             </Link>
